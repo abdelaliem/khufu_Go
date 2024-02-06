@@ -7,6 +7,7 @@ const app = express();
 app.use(cors);
 
 // middleware
+app.use(express.json())
 app.use("/books", booksRoute);
 
 // running the backend
