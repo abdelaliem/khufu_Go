@@ -1,29 +1,35 @@
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { Navigate, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AboutUs from "./pages/AboutUs";
+import Bus from "./pages/Bus";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Footer from "./components/Footer";
+import Error404 from "./pages/Error404";
+import UserDashboard from "./pages/UserDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import Navbar from "./components/Navbar";
 
 function App() {
-  let [state, setState] = useState(0);
-  let books = useRef([]);
-  function increase() {
-    setState((state += 1));
-  }
-  useEffect(() => {
-    axios.get("http://localhost:9000/books").then((data) => {
-      books.current = data.data;
-      console.log(books.current);
-    });
-  }, []);
-
   return (
-    <div className="pt-8 ps-12">
-      <p className="text-3xl font-bold underline">{state} sdadsa</p>
-      <button
-        className="h-10 mt-10 px-6 font-semibold rounded-md bg-black text-white"
-        onClick={() => increase()}
-      >
-        increase
-      </button>
-      <div>{books.current[0]?.title}</div>
+    <div className="container0">
+      <div className="px-9 container m-auto">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/bus" element={<Bus />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/driver" element={<Register />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/error404" element={<Error404 />} />
+          <Route path="/home" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/error404" />} />
+        </Routes>
+        <Footer />
+      </div>
     </div>
   );
 }
