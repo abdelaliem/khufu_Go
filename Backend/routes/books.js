@@ -4,4 +4,4 @@ const controller = require("../controller/booksController")
 
 router.get("/", controller.getbooks);
 
-module.exports = router 
+module.exports = router
