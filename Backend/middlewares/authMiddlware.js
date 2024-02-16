@@ -1,7 +1,7 @@
 const jwt =require('jsonwebtoken')
 
 const requireAuth = function (req, res, next) {
-    const token = req.body.jwt
+    const token = req.body.token
     if (token) {
         jwt.verify(token , 'sultan is develober',(err , decodedToken)=>{
             if (err) {
