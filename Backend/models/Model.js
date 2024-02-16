@@ -22,7 +22,11 @@ class SQLModel {
         const results = await this.executeQuery(query);
         return results;
     }
-
+    async find(id,[...data]) {
+        const query = `SELECT ${[...data]} FROM ${this.tableName} WHERE id = ?`;
+        const results = await this.executeQuery(query,id);
+        return results
+    }
     async findById(id) {
         const query = `SELECT * FROM ${this.tableName} WHERE id = ?`;
         const results = await this.executeQuery(query, [id]);
@@ -44,7 +48,6 @@ class SQLModel {
             let value = typeof data[key] === 'string' ? `'${data[key]}'` : data[key];
             return `${key} = ${value}`;
         }).join(', ');
-        console.log(str)
         const query = `UPDATE ${this.tableName} SET ${str} WHERE id = ?`;
         const result = await this.executeQuery(query, [ id]);
         return result.affectedRows;
@@ -54,6 +57,34 @@ class SQLModel {
         const query = `DELETE FROM ${this.tableName} WHERE id = ?`;
         const result = await this.executeQuery(query, [id]);
         return result.affectedRows;
+    }
+    where(data ,value , operator = "=") {
+        return {
+            find:async()=> {
+                const query = `SELECT * FROM ${this.tableName} WHERE ${data} ${operator} ?`;
+                const results = await this.executeQuery(query , [value]);
+                return results;
+            },
+            first:async()=> {
+                const query = `SELECT * FROM ${this.tableName} WHERE ${data} ${operator} ?`;
+                const results = await this.executeQuery(query , [value]);
+                return results[0];
+            },
+            delete:async ()=> {
+                const query = `DELETE FROM ${this.tableName} WHERE ${data} ${operator} ?`;
+                const result = await this.executeQuery(query, [value]);
+                return result.affectedRows;
+            },
+            update:async()=> {
+                let str = Object.keys(data).map(key =>  {
+                    let value = typeof data[key] === 'string' ? `'${data[key]}'` : data[key];
+                    return `${key} = ${value}`;
+                }).join(', ');
+                const query = `UPDATE ${this.tableName} SET ${str} WHERE ${data} ${operator} ?`;
+                const result = await this.executeQuery(query, [value]);
+                return result.affectedRows;
+            }
+        };
     }
 }
 

@@ -7,19 +7,5 @@ class UserModel extends SQLModel {
         super('users');
     }
 }
-// example in controller 
-/*
-    router.get('/find/:id',async(req,res)=>{
-        const data = await UserModel.findById(2)
-        res.send(data)
-    })
-    router.post('/add/:id',async(req,res)=>{
-    const data = await UserModel.create({
-        name:"sayed",
-        "age":5,
-        email:"sayed@55"
-    })
-    res.send("done")
-})
-*/
+
 module.exports = new UserModel
