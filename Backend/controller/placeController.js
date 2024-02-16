@@ -16,12 +16,14 @@ const getPlaceId = async (req,res)=>{
         const lang = parseFloat(req.params.lang)
         const [data] = await place.getPlaceId(lat,lang);
         let {place_id} = data
-        console.log(place_id);
-        const places = await bus.getBusNum(place_id)
-        console.log(places)
-        res.send(data)
+        const [number] = await bus.getBusNum(place_id)
+        let {bus_number} = number
+        const placesOfBus = await bus.getBusPlaces(bus_number)
+        const [busesId] = await bus.getBusId(bus_number)
+        const {bus_id} = busesId
+        res.send(bus_number)
     } catch (error) {
-        console.log('not working')
+        console.log(error)
     }
 }   
 module.exports= {getPlaces,getPlaceId}

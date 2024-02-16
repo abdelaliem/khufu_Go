@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar"
-
+ import FirstSection from "../components/FirstSection"
 function HomePage() {
-    return (
+    return ( 
+     
         <div>
-            Home
+           <FirstSection/>
         </div>
     )
 }

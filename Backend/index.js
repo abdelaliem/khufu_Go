@@ -1,7 +1,7 @@
 const express = require("express");
 const booksRoute = require("./routes/books");
 const placesRoute = require('./routes/placesRoutes')
-const useRoute = require('./routes/userRoutes')
+// const useRoute = require('./routes/userRoutes')
 const cors = require("./config/cors");
 const app = express();
 
@@ -12,7 +12,8 @@ app.use(cors);
 app.use(express.json())
 app.use("/books", booksRoute);
 app.use("/places",placesRoute );
-app.use("/user",useRoute );
+app.use('/bus/:id',placesRoute)
+// app.use("/user",useRoute );
 
 // running the backend
 app.listen(8000, () => {

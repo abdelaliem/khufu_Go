@@ -13,6 +13,18 @@ const getAllPlaces = () =>{
       });
 
 }
+const getPlaceName = (id)=>{
+  return new Promise((resolve, reject) => {
+    const query = " SELECT `place_name` FROM `places` WHERE `place_id`=? ";
+     con.query(query,[id], (err, result) => {
+       if (err) {
+         reject(err);
+       } else {
+         resolve(result);
+       }
+     });
+   });
+}
 //get place id of specific (lat,lang)
 const getPlaceId = (lat,lang)=>{
 return new Promise((resolve,reject)=>{ 
@@ -26,4 +38,4 @@ con.query(query,[lat,lang],(err,data)=>{
 })
 })
 }
-module.exports = {getAllPlaces,getPlaceId}
+module.exports = {getAllPlaces,getPlaceId,getPlaceName}

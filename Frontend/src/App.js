@@ -6,14 +6,18 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import Error404 from "./pages/Error404";
+import Navbar from "./components/Navbar";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import Navbar from "./components/Navbar";
-
+import Preload from "./components/Preloads";
+ 
 function App() {
   return (
-    <div className="container0">
-      <div className="px-9 container m-auto">
+    <>
+  <Preload/>
+    <div className="container0 app">
+      <div className="px-9 container-fluid m-auto ">
+        
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -31,6 +35,7 @@ function App() {
         <Footer />
       </div>
     </div>
+    </>
   );
 }
 
