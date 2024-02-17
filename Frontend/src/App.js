@@ -10,11 +10,12 @@ import Navbar from "./components/Navbar";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Preload from "./components/Preloads";
+import BusesInfo from "./components/BusesInfo";
  
 function App() {
   return (
     <>
-  <Preload/>
+   
     <div className="container0 app">
       <div className="px-9 container-fluid m-auto ">
         
@@ -30,7 +31,9 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/error404" element={<Error404 />} />
           <Route path="/home" element={<Navigate to="/" />} />
+          <Route path="/busesInfo" element={<BusesInfo />} />
           <Route path="*" element={<Navigate to="/error404" />} />
+          
         </Routes>
         <Footer />
       </div>
