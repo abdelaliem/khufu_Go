@@ -9,17 +9,12 @@ import Error404 from "./pages/Error404";
 import Navbar from "./components/Navbar";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import Preload from "./components/Preloads";
 import BusesInfo from "./components/BusesInfo";
  
 function App() {
   return (
     <>
-   
-    <div className="container0 app">
-      <div className="px-9 container-fluid m-auto ">
-        
-        <Navbar />
+        <Navbar black={true} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />
@@ -33,11 +28,8 @@ function App() {
           <Route path="/home" element={<Navigate to="/" />} />
           <Route path="/busesInfo" element={<BusesInfo />} />
           <Route path="*" element={<Navigate to="/error404" />} />
-          
         </Routes>
         <Footer />
-      </div>
-    </div>
     </>
   );
 }
