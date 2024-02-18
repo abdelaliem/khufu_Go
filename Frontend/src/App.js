@@ -4,7 +4,6 @@ import AboutUs from "./pages/AboutUs";
 import Bus from "./pages/Bus";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Footer from "./components/Footer";
 import Error404 from "./pages/Error404";
 import Navbar from "./components/Navbar";
 import UserDashboard from "./pages/UserDashboard";
@@ -29,7 +28,6 @@ function App() {
           <Route path="/busesInfo" element={<BusesInfo />} />
           <Route path="*" element={<Navigate to="/error404" />} />
         </Routes>
-        <Footer />
     </>
   );
 }

@@ -24,9 +24,10 @@ function Navbar({ black }) {
         </div>
       </div>
       <div>
+        {}
         <ul className="list-none sm:flex justify-end items-center flex-1 hidden">
           <li className="px-3 text-[18px] text-white">
-            <Link to={"/signup"}>Sign Up</Link>
+            <Link to={"/register"}>Sign Up</Link>
           </li>
           <li className="px-3 text-[18px] text-white">
             <Link to={"/login"}>Log In</Link>

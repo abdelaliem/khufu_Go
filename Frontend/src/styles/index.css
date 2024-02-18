@@ -16,56 +16,63 @@
 }
 
 .container0 {
-   width:100%;
+  width: 100%;
    background-color:black;
 }
 .container-fluid{
   background-color:black;
 }
-.img{
+.img {
   height: 2%;
   width: 30%;
   display: inline;
   padding: 0px;
 }
-.form{
+.form {
   margin-left: 37%;
-  
 }
-.conForm{
+.conForm {
   padding-top: 8%;
 }
-.title{
+.title {
   color: rgb(255, 255, 255);
   font-size: xx-large;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-.submitbutton{
+.submitbutton {
   background-color: black;
   color: #ffed4a;
-  border:black solid 1px ;
+  border: black solid 1px;
   padding: 5px 10px;
   margin-top: 10%;
   margin-left: 5%;
-  width:40%;
+  width: 40%;
   border-radius: 10%;
 }
-.go{
+.go {
   color: #ffed4a;
 }
-.khufu{
+.khufu {
   color: white;
 }
-.container{
-  height: 500px;
-  background-image: url('https://www.shutterstock.com/image-photo/bus-traveling-on-asphalt-road-600nw-1345741577.jpg');
+.container {
+  /* background-image: url("https://www.shutterstock.com/image-photo/bus-traveling-on-asphalt-road-600nw-1345741577.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
- 
 
 body {
   background-color: #f6f6f6;
+}
+
+/* map styles */
+.map-container {
+  border-radius: 20px;
+  height: 500px;
+  transition: all 0.4s;
+  position: relative !important;
+  margin-top: 10px;
 }
 .card{
   border: #f6f6f690 solid 1px;
