@@ -13,7 +13,6 @@ import BusesInfo from "./components/BusesInfo";
 function App() {
   return (
     <>
-        <Navbar black={true} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />

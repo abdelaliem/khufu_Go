@@ -17,10 +17,10 @@
 
 .container0 {
   width: 100%;
-   background-color:black;
+  background-color: black;
 }
-.container-fluid{
-  background-color:black;
+.container-fluid {
+  background-color: black;
 }
 .img {
   height: 2%;
@@ -74,32 +74,29 @@ body {
   position: relative !important;
   margin-top: 10px;
 }
-.card{
+.card {
   border: #f6f6f690 solid 1px;
   background-color: #141212;
-  border-radius:15px;
-
+  border-radius: 15px;
 }
-.card:hover{
-  box-shadow:5px 3px 24px 10px   rgba(128, 127, 127, 0.457);
+.card:hover {
+  box-shadow: 5px 3px 24px 10px rgba(128, 127, 127, 0.457);
   cursor: pointer;
-  width:105%;
+  width: 105%;
 }
-.line{
-   
+.line {
   color: rgba(128, 128, 128, 0.801);
-   border-bottom : #f6f6f668 solid 0.5px;
+  border-bottom: #f6f6f668 solid 0.5px;
   border-top-color: white;
- 
 }
-.circule{
+.circule {
   background-color: #ffed4a;
   width: 20%;
   border-radius: 100%;
 }
-.text{
+.text {
   color: rgb(189, 186, 186);
 }
-.conCard{
+.conCard {
   box-sizing: content-box;
 }

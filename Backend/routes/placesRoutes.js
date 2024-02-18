@@ -5,7 +5,7 @@ const bus  = require('../controller/busController')
 
 // router.get('/',controller.getPlaces)
 // router.get('/place/:lat/:lang', controller.getPlaceId)
-// router.get('/bus/:id',bus.getbusNum)
+router.get('/bus/:id',bus.getbusNum)
 
 router.get("/",controller.getPlaces)
 module.exports = router;
