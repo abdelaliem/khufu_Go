@@ -100,3 +100,6 @@ body {
 .conCard {
   box-sizing: content-box;
 }
+.footer-section {
+  text-align: center;
+}
