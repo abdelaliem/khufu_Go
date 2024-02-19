@@ -4,7 +4,7 @@ function Navbar({ black }) {
   return (
     <nav
       className={`w-ful flex py-2 p-4 justify-between items-center ${
-        black ? "bg-black" : ""
+        black ? "bg-black" : " bg-transparent text-white"
       } `}
     >
       <div className="w-ful flex justify-start items-center">
