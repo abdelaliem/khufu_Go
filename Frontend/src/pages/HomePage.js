@@ -5,13 +5,16 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import img1 from "../images/e4114c7f3acf65369f9a0fbaf5ebf38e.jfif";
 
-function HomePage() {
+function HomePage({data,setData}) {
   return (
-    <div className="relative ">
+    <div className="relative bg-black lg:bg-transparent">
       {/* <Preload /> */}
-      <img src={img1} className=" absolute -z-20" />
+      <img
+        src={img1}
+        className=" absolute -z-20 object-cover opacity-0 lg:opacity-100 "
+      />
       <Navbar />
-      <FirstSection />
+      <FirstSection data={data} setData={setData} />
       <AboutUs />
       <Footer />
     </div>
