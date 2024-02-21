@@ -3,8 +3,6 @@ const bus = require('../models/bus');
 const getPlaces = async (req,res)=>{
      try {
          const data = await place.getAllPlaces();
-         console.log("##############");
-         console.log(data);
         res.json(data); 
      } catch (error) {
         console.log('not working')

@@ -13,6 +13,9 @@ app.use(cors);
 app.use(express.json())
 app.use("/books", booksRoute);
 app.get("/bus/:id/:locationId",busesRoute)
+app.get("/all/buses/:id/:locationId",busesRoute)
+app.get("/all/buses",busesRoute)
+app.get("/bus/:num",busesRoute)
 app.use("/places",placesRoute)
 // app.use('/bus/:id',placesRoute)
  

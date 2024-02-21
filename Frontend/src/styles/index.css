@@ -75,8 +75,9 @@ body {
   margin-top: 10px;
 }
 .card {
-  border: #f6f6f690 solid 1px;
-  background-color: #141212;
+  
+  border: #CBCBCB solid 1px;
+  background-color:#130D00;
   border-radius: 15px;
 }
 .card:hover {
@@ -90,8 +91,9 @@ body {
   border-top-color: white;
 }
 .circule {
-  background-color: #ffed4a;
-  width: 20%;
+  background-color:#FFCB50;
+  width: 59px;
+  height: 59px;
   border-radius: 100%;
 }
 .text {
@@ -99,6 +101,8 @@ body {
 }
 .conCard {
   box-sizing: content-box;
+  padding-left: 100px;
+  height: 100%;
 }
 .search{
   width: 40%;

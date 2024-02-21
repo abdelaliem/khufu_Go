@@ -13,10 +13,12 @@ import BusesInfo from "./components/BusesInfo";
 function App() {
   return (
     <>
+    
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/bus" element={<Bus />} />
+           
+          <Route path="/bus" element={<BusesInfo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<UserDashboard />} />
@@ -24,7 +26,6 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/error404" element={<Error404 />} />
           <Route path="/home" element={<Navigate to="/" />} />
-          <Route path="/busesInfo" element={<BusesInfo />} />
           <Route path="*" element={<Navigate to="/error404" />} />
         </Routes>
     </>
