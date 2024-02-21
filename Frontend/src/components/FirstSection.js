@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/index.css";
 import axios from "axios";
 
-function FirstSection() {
-  const [data, setData] = useState([]);
+function FirstSection({ data, setData }) {
+  // const [data, setData] = useState([]);
   const [bus, setBus] = useState([]);
   const [location, setlocation] = useState("");
   const [dest, setdest] = useState("");
@@ -12,16 +12,25 @@ function FirstSection() {
     const res = await axios.get("http://127.0.0.1:8000/places");
     setData(res.data);
   };
-  const getBuses = async (d, l) => {
-    console.log(d);
-    console.log(l);
-    const res = await axios.get(`http://127.0.0.1:8000/bus/${l}/${d}`);
+  const getBuses = async (destination, location) => {
+    let [locationId] = data.filter((item) => {
+      if (item.place_name === location) {
+        return item;
+      }
+    });
+    console.log(destination);
+    console.log(locationId.place_id);
+    const res = await axios.get(
+      `http://127.0.0.1:8000/bus/${locationId.place_id}/${destination}`
+    );
     setBus(res.data);
   };
   useEffect(() => {
     getdata();
-    console.log("hi");
   }, []);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   const handleLocationInput = (e) => {
     setlocation(e.target.value);
   };
@@ -32,17 +41,18 @@ function FirstSection() {
     getBuses(dest, location);
   };
   return (
-    <div className=" h-screen container m-auto">
-      <div className=" conForm grid-cols-1 grid place-content-center">
+    <div className="container m-auto lg:h-screen h-[80vh]">
+      <div className=" conForm grid-cols-1 grid place-content-center mt-28 lg:mt-4">
         <h1 className="title text-center font-bold">
           Your Journey, Our Priority!
         </h1>
         <form
-          className="w-[400px] m-auto flex flex-col"
+          className="w-[400px] m-auto flex flex-col "
           method="get"
           action="/"
         >
           <input
+            list="brow"
             type="text"
             value={location}
             name="location"
@@ -55,6 +65,11 @@ function FirstSection() {
             focus:invalid:border-pink-500 focus:invalid:ring-pink-500
             "
           />
+          <datalist id="brow">
+            {data.map((item, i) => {
+              return <option value={item["place_name"]} key={i} />;
+            })}
+          </datalist>
           <select
             value={dest}
             name="dest"

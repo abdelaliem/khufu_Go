@@ -9,16 +9,17 @@ import Navbar from "./components/Navbar";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import BusesInfo from "./components/BusesInfo";
+import { useState } from "react";
  
 function App() {
+ let [data,setData] = useState([])
   return (
     <>
     
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage data={data} setData={setData}/>} />
           <Route path="/about" element={<AboutUs />} />
-           
-          <Route path="/bus" element={<BusesInfo />} />
+          <Route path="/bus" element={<Bus />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<UserDashboard />} />
