@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Spinner from "../components/Spinner";
 import "mapbox-gl/dist/mapbox-gl.css";
 function UserDashboard() {
-  mapboxgl.accessToken= process.env.REACT_APP_MAP_ACCESS_TOKEN;
+  mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
   const mapContainer = useRef(null);
   const map = useRef(null);
   let [zoom, setZoom] = useState(14);
@@ -19,11 +19,14 @@ function UserDashboard() {
     if (!map.current) {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/abdelrhman21/clsog3tq102as01r44wzq6i43",
+        style: 'mapbox://styles/mapbox/streets-v12',
         center: [0, 0],
         zoom: zoom,
       });
     }
+    map.current.on('load', () => {
+      mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+    });
     console.log("here");
     let intervalId = setInterval(() => {
       if (navigator.geolocation) {

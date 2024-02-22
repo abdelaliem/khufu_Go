@@ -1,6 +1,9 @@
 function AboutUs() {
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-white">
+    <section
+      className="w-full min-h-screen flex items-center justify-center bg-white"
+      id="about"
+    >
       {/* Left Column */}
       <div className="w-full lg:w-1/2 p-7">
         <header className="max-w-4xl mx-auto py-8">
@@ -41,7 +44,7 @@ function AboutUs() {
           </button>
         </main>
       </div>
-    </div>
+    </section>
   );
 }
 
