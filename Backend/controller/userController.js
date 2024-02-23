@@ -55,7 +55,9 @@ module.exports = {
             });
             res.send("signUp done");
         } catch (error) {
-            res.send(error.sqlMessage);
+            const err = error.sqlMessage.replace("Duplicate entry '", "used before '")
+            const err2 = err.replace("for key '",'as ')
+            res.send([err2]);
         }
     },
     login: async (req, res) => {
