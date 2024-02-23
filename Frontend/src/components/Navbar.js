@@ -18,7 +18,7 @@ function Navbar({ black }) {
         black ? "bg-black" : ""
       } `}
     >
-      <div className="w-ful flex justify-start items-center">
+      <div className="w-ful flex  justify-start items-center">
         <div className="font-[500] text-[30px] text-white"><span style={{color:"#FFCB50"}}>Khufu</span> GO</div>
         <div className="ps-3">
           <ul className="list-none sm:flex justify-end items-center flex-1 hidden">

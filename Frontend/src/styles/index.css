@@ -75,11 +75,12 @@ body {
   margin-top: 10px;
 }
 .card {
-  
+  height: 300px;
   border: #CBCBCB solid 1px;
   background-color:#130D00;
   border-radius: 15px;
 }
+
 .card:hover {
   box-shadow: 5px 3px 24px 10px rgba(128, 127, 127, 0.457);
   cursor: pointer;
@@ -101,4 +102,60 @@ body {
 }
 .conCard {
   box-sizing: content-box;
+}
+.search{
+  width: 40rem;
+  padding: 0.5%;
+  border: white;
+  border-radius: 15px;
+  
+  margin-top: 1%;
+  padding-left:1rem;
+}
+.input{
+  border: none;
+  color: #000000;
+  background-color:#FFCB50;
+  border-bottom: #000000 1px solid;
+  margin-left: 1.5rem;
+  margin-top: 6rem;
+}
+.input::placeholder{
+  color: #000000;
+  font-weight: bolder;
+}
+.input:focus{
+  outline:none;
+}
+
+.searchCon{
+   background-color:black;
+    
+}
+.search input{
+  border: 0;
+  outline:none;
+}
+.search:focus{
+  outline: none;
+  box-shadow: 0px -1px 22px 4px rgba(247,213,102,0.70);
+}
+.sgrid{
+  height: max-content;
+}
+.div{
+  border: #0D0D0D solid 1px;
+  border-radius: 15px;
+  height:35rem;
+  background-color: #FFCB50;
+  color: #000000;
+}
+.trip{
+  font-family: Inter;
+  font-weight: bolder;
+  margin-top: 6rem;
+}
+.clickbtn{
+  border-radius: 15px;
+  width: 10rem;
 }
