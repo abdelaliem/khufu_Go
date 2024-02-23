@@ -12,6 +12,7 @@ import Signup from "./pages/Signup";
 
 function App() {
   let [bus, setBus] = useState({});
+  let [busNum, setBusNum] = useState();
   return (
     <>
       <Routes>
@@ -20,7 +21,7 @@ function App() {
         <Route path="/bus" element={<BusesInfo bus={bus} setBus={setBus}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
-        <Route path="/user" element={<UserDashboard />} />
+        <Route path="/user" element={<UserDashboard busNum={busNum}/>} />
         <Route path="/driver" element={<Signup />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/error404" element={<Error404 />} />
