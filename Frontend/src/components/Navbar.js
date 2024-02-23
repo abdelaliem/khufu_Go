@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
+import NavUser from "./user/NavUser";
 
 function Navbar({ black }) {
   const navigate = useNavigate()
@@ -45,8 +46,16 @@ function Navbar({ black }) {
           </li>
         </ul>
       </div>]
-      : ""}
-
+      :xs?[
+        <div style={{display:"flex" ,justifyContent:"center" , alignItems:"center" , marginRight:"10px"}}>
+          <div style={{color:"black" , backgroundColor:"white" , borderRadius:"15px" , padding:"5px" , cursor:"pointer"}}>
+              {xs.firstName[0].toUpperCase()}
+              {xs.secondName[0].toUpperCase()}
+          </div>
+          <svg class="w-2.5 h-2.5 ms-3" style={{color:"white" ,cursor:"pointer" }}aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+        </div>]:""}
     </nav>
   );
 }
