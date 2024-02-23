@@ -7,4 +7,5 @@ const UserModel = require('../models/UserModel');
 router.post('/signup',userController.sginUp)
 router.post('/login',userController.login)
 router.get('/userinfo/:token',userController.userInfo)
+router.put('/updateLat/:token',userController.updateLatLang)
 module.exports= router;
