@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../styles/index.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-function FirstSection({ data, setData }) {
-  // const [data, setData] = useState([]);
-  const [bus, setBus] = useState([]);
+function FirstSection({ bus,setBus }) {
+  const [data, setData] = useState([]);
+  // const [bus, setBus] = useState([]);
   const [location, setlocation] = useState("");
   const [dest, setdest] = useState("");
 
@@ -21,9 +22,15 @@ function FirstSection({ data, setData }) {
     console.log(destination);
     console.log(locationId.place_id);
     const res = await axios.get(
-      `http://127.0.0.1:8000/bus/${locationId.place_id}/${destination}`
-    );
-    setBus(res.data);
+      `http://127.0.0.1:8000/all/buses/${locationId.place_id}/${destination}`
+    ).then((res)=>{
+      setBus(bus ={
+      bus: res.data,
+      destination: destination,
+      location: locationId.place_id,
+    });});
+    console.log(res.data);
+    
   };
   useEffect(() => {
     getdata();
@@ -91,13 +98,14 @@ function FirstSection({ data, setData }) {
               );
             })}
           </select>
-          <button
+          <Link
             type="button"
             onClick={handleform}
-            className=" w-[150px] m-auto h-[40px] mt-8 bg-black rounded-lg text-white"
+            className=" w-[150px] m-auto text-center pt-2 h-[40px] mt-8 bg-black rounded-lg text-white"
+            to={"/bus"}
           >
             <span className=" text-[#FFCB50]">See </span> Buses
-          </button>
+          </Link>
         </form>
       </div>
     </div>

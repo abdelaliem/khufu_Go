@@ -151,11 +151,21 @@ body {
   color: #000000;
 }
 .trip{
-  font-family: Inter;
+   
   font-weight: bolder;
   margin-top: 6rem;
 }
 .clickbtn{
   border-radius: 15px;
   width: 10rem;
+}
+.noTripH{
+  font-weight: 400;
+  font-size: 48px;
+  color: #8B8B8B;
+}
+.noTripP{
+ font-weight: 400;
+ font-size: 24px;
+ color: #8B8B8B;
 }

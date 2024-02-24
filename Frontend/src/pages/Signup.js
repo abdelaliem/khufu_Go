@@ -1,7 +1,11 @@
+import Navbar from "../components/Navbar.js";
 import Register from "../components/user/Register.jsx";
 function Signup() {
   return (
-    <Register/>
+    <>
+      <Navbar black={true} />
+      <Register />
+    </>
   );
 }
 

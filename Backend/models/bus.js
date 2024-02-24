@@ -11,7 +11,7 @@ const getBusNum = (id)=>{
                 reject(err)
             }
         })}else{
-            const query = "SELECT `bus_number` FROM `bus_info` GROUP BY `bus_number`"
+        const query = "SELECT `bus_number` FROM `bus_info` GROUP BY `bus_number`"
         con.query(query,(err,data)=>{
             if(data){
                 resolve(data)

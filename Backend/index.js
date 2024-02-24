@@ -2,7 +2,8 @@ const express = require("express");
 const booksRoute = require("./routes/books");
 const busesRoute = require('./routes/busesRoutes')
 const placesRoute = require('./routes/placesRoutes')
-// const useRoute = require('./routes/userRoutes')
+const userRoute = require('./routes/userRoutes')
+const driverRoute = require("./routes/driverRoutes")
 const cors = require("./config/cors");
 const app = express();
 
@@ -11,15 +12,15 @@ app.use(cors);
 
 // middleware
 app.use(express.json())
-app.use("/books", booksRoute);
 app.get("/bus/:id/:locationId",busesRoute)
 app.get("/all/buses/:id/:locationId",busesRoute)
 app.get("/all/buses",busesRoute)
 app.get("/bus/:num",busesRoute)
 app.use("/places",placesRoute)
 // app.use('/bus/:id',placesRoute)
- 
-// app.use("/user",useRoute );
+app.use("/user",userRoute );
+app.get("/bookedUsers/:busId",driverRoute)
+app.put("/applyBooks",driverRoute)
 
 // running the backend
 app.listen(8000, () => {

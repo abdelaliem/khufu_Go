@@ -1,28 +1,42 @@
 // import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+import Navbar from "../components/Navbar";
 import mapboxgl from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
 import Spinner from "../components/Spinner";
 import "mapbox-gl/dist/mapbox-gl.css";
-function UserDashboard() {
-  mapboxgl.accessToken= process.env.REACT_APP_MAP_ACCESS_TOKEN;
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+function UserDashboard({ busNum = 1, busPath }) {
+  mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
+  const navigate = useNavigate();
   const mapContainer = useRef(null);
   const map = useRef(null);
   let [zoom, setZoom] = useState(14);
+  let [err, setErr] = useState("");
   let [isLoading, setIsLoading] = useState(false);
+  let [busesData, setBusesData] = useState();
   let [userLocation, setUserLocation] = useState({
     lat: null,
     lng: null,
     access: false,
   });
 
+  async function getbusesData() {
+    const res = await axios.get(`http://127.0.0.1:8000/bus/${busNum}`);
+    setBusesData((busesData = res.data));
+  }
+
   useEffect(() => {
     if (!map.current) {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/abdelrhman21/clsog3tq102as01r44wzq6i43",
+        style: "mapbox://styles/mapbox/streets-v12",
         center: [0, 0],
         zoom: zoom,
       });
+      mapboxgl.setRTLTextPlugin(
+        "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js"
+      );
     }
     console.log("here");
     let intervalId = setInterval(() => {
@@ -32,6 +46,7 @@ function UserDashboard() {
         console.log("Geolocation not supported");
       }
 
+      getbusesData();
       async function success(position) {
         setUserLocation({
           lat: position.coords.latitude,
@@ -39,16 +54,10 @@ function UserDashboard() {
           access: true,
         });
         setIsLoading((isLoading = true));
-        // map.addControl(
-        //   new MapboxDirections({
-        //     accessToken: mapboxgl.accessToken,
-        //   }),
-        //   "top-left"
-        // );
         console.log(userLocation);
       }
       function error() {
-        console.log("Unable to retrieve your location");
+        setErr((err = "Unable to retrieve your location"));
         console.log(userLocation);
       }
     }, 5000);
@@ -57,21 +66,52 @@ function UserDashboard() {
   useEffect(() => {
     if (map.current) {
       map.current.jumpTo({ center: [userLocation.lng, userLocation.lat] });
+      const markerUserPopup = new mapboxgl.Popup({
+        offset: 25,
+        maxWidth: "100px",
+        maxHeight: "20px",
+      }).setHTML("<h3>Your position</h3>");
+      const markerBusesPopup = new mapboxgl.Popup({
+        offset: 25,
+        maxWidth: "100px",
+        maxHeight: "20px",
+      });
       new mapboxgl.Marker()
         .setLngLat([userLocation.lng, userLocation.lat])
         .addTo(map.current)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }));
+        .setPopup(markerUserPopup)
+        .togglePopup()
+        .getElement();
+      // .addEventListener("click", () => {
+      //   navigate('/home');
+      // });
+      busesData?.map((item) => {
+        new mapboxgl.Marker({ color: "green" })
+          .setLngLat([item.lng, item.lat])
+          .addTo(map.current)
+          .setPopup(markerBusesPopup)
+          .setHTML(`<h3>Bus ${busNum}</h3>`);
+      });
     }
   }, [isLoading]);
 
   return (
-    <div className=" overflow-hidden">
-      {isLoading ? "" : <Spinner></Spinner>}
-      <div
-        ref={mapContainer}
-        className={`map-container m-2 ${isLoading ? "" : "opacity-0"} `}
-      />
-    </div>
+    <>
+      <Navbar black={true} />
+      {err ? (
+        <div className=" text-center text-[28px] p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+          {err}
+        </div>
+      ) : (
+      <div className=" overflow-hidden">
+        {isLoading ? "" : <Spinner></Spinner>}
+        <div
+          ref={mapContainer}
+          className={`map-container m-2 ${isLoading ? "" : "opacity-0"} `}
+        />
+      </div>
+      )}
+    </>
   );
 }
 export default UserDashboard;

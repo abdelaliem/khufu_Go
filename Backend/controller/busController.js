@@ -98,7 +98,7 @@ const getAllBusesOfId = async(req,res)=>{
     }
     const finalData = await new Promise((resolve,reject)=>{
 
-        //using let because of abdelaliem have a problems with var
+        //using let because of abdelaliem have a problem with var
         let test = data.length
         let Arraydata=[]
 
@@ -116,7 +116,7 @@ const getAllBusesOfId = async(req,res)=>{
                     placesId.forEach(async item => {
                     const placeId = parseInt(item)
                     const [placeName] = await placeModule.getPlaceName(placeId)
-                    placesName.push(" "+ placeName['place_name'] +",")
+                    placesName.push(" "+ placeName['place_name'] +" ")
                     sectest-=1
                     if(sectest==0){
                         resolve(placesName)
@@ -162,7 +162,7 @@ else{
             const placesNames = new Promise((resolve,reject)=>{
                 placesId.forEach(async id => {
                 const [name] = await placeModule.getPlaceName(parseInt(id)) 
-                bus['places'].push(" "+ name['place_name'] +",")
+                bus['places'].push(" "+ name['place_name'] +" ")
                 sectest-=1
                 if(sectest==0){
                     resolve()
