@@ -25,12 +25,12 @@ function LoginComponent() {
             "password": password,
             "email": email,
         })
-        setData(data)
         console.log(data)
+        setData(data)
         if (data != "email is wrong" && data != "password is wrong") {
             localStorage.setItem("xs", data.token)
             navigate("/");
-            // window.location.reload();
+            window.location.reload()
         }
     }
     return (
@@ -53,6 +53,20 @@ function LoginComponent() {
                         <Link to="/login" className={style.login}>SignUp</Link>
                     </div>
                 </form>
+                {data == "email is wrong" || data== "password is wrong" ? [<div role="alert">
+                    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                        invalid inputs
+                    </div>
+                    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                        <ul>
+
+
+                                <li>{data}</li>
+
+                        </ul>
+                    </div>
+                </div>]:
+                ""}
             </div>
         </div>
     );
