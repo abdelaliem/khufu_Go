@@ -19,4 +19,24 @@ const bookUsers = async(req,res)=>{
         console.log("can't update users")
     }
 }
-module.exports = {Users,bookUsers}
+
+const cancelBook = async (req,res)=>{
+    try {
+        const userId = parseInt(req.body.user_id)
+        const cancel = await driver.cancelAplly(userId)
+        res.send(cancel)
+    } catch (error) {
+        console.log("not canceled")
+    }
+}
+
+const bookDone = async (req,res)=>{
+    try {
+        const userId = parseInt(req.body.user_id)
+        const done = await driver.bookDone(userId)
+        res.send(done)
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = {Users,bookUsers,cancelBook,bookDone}

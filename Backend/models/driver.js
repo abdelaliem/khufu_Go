@@ -1,7 +1,7 @@
 const con = require('../config/db')
 const bookUsers = (busId)=>{
     return new Promise((resolve,reject)=>{
-        const quary = "SELECT `lat`,`lang` FROM `users` WHERE `requested`=?"
+        const quary = "SELECT `lat`,`lang`,`user_name` FROM `users` WHERE `requested`=?"
         con.query(quary,[busId],(err,data)=>{
             if(data){
                 resolve(data)
@@ -15,6 +15,7 @@ const bookUsers = (busId)=>{
 
 const applyBooks = (userId,busId)=>{
     return new Promise((resolve,reject)=>{
+        
         const quary = "UPDATE `users` SET `requested`=? where `user_id`=?"
         con.query(quary,[busId,userId],(err,data)=>{
             if(data){
