@@ -36,7 +36,7 @@ module.exports = {
 
         if (validationErrors.length > 0) {
             // If there are validation errors, send a response with all error messages
-            res.send(validationErrors.join("\n"));
+            res.send(validationErrors);
             return;
         }
         //hashthePassword
@@ -55,7 +55,9 @@ module.exports = {
             });
             res.send("signUp done");
         } catch (error) {
-            res.send(error.sqlMessage);
+            const err = error.sqlMessage.replace("Duplicate entry '", "used before '")
+            const err2 = err.replace("for key '",'as ')
+            res.send([err2]);
         }
     },
     login: async (req, res) => {
@@ -87,4 +89,23 @@ module.exports = {
             }
         );
     },
+    updateLatLang:(req,res)=>{
+        const lat = req.body.lat
+        const lang = req.body.lang
+        jwt.verify(
+            req.params.token,
+            "sultan is develober",
+            async (err, decodedToken) => {
+                if (err) {
+                    res.send(err.message);
+                } else {
+                    const data = await UserModel.update(decodedToken["id"],{
+                        lat,
+                        lang
+                    });
+                    res.send(data);
+                }
+            }
+        );
+    }
 };
