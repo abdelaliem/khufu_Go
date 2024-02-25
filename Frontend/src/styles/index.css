@@ -14,7 +14,49 @@
 * {
   font-family: "Rubik", sans-serif;
 }
+ 
+.scroll {
+height: 100%;
+overflow : auto; /* add a vertical scrollbar */
+}
 
+.scroll::-webkit-scrollbar {
+  height: 20px;
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.scroll::-webkit-scrollbar-track {
+ 
+  background:black; /* color of the tracking area */
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color:#FFCB50; /* color of the scroll thumb */
+  border-radius: 10px; /* roundness of the scroll thumb */
+ 
+   /* creates padding around scroll thumb */
+}
+.scroll2 {
+  height: 100%;
+  overflow : auto; /* add a vertical scrollbar */
+  }
+  
+  .scroll2::-webkit-scrollbar {
+    height: 20px;
+    width: 8px; /* width of the entire scrollbar */
+  }
+  
+  .scroll2::-webkit-scrollbar-track {
+   
+    background:black; /* color of the tracking area */
+  }
+  
+  .scroll2::-webkit-scrollbar-thumb {
+    background-color:wheat; /* color of the scroll thumb */
+    border-radius: 5px; /* roundness of the scroll thumb */
+   
+     /* creates padding around scroll thumb */
+  }
 .container0 {
   width: 100%;
   background-color: black;
@@ -75,7 +117,7 @@ body {
   margin-top: 10px;
 }
 .card {
-  height: 300px;
+  height:300px;
   border: #CBCBCB solid 1px;
   background-color:#130D00;
   border-radius: 15px;
@@ -169,3 +211,4 @@ body {
  font-size: 24px;
  color: #8B8B8B;
 }
+ 

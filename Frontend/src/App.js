@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import Login from "./pages/Login";
+import DriverDashboard from './pages/DriverDashboard' 
 import Error404 from "./pages/Error404";
 import Navbar from "./components/Navbar";
 import UserDashboard from "./pages/UserDashboard";
@@ -22,7 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/user" element={<UserDashboard busNum={busNum}/>} />
-        <Route path="/driver" element={<Signup />} />
+        <Route path="/driver" element={<DriverDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/error404" element={<Error404 />} />
         <Route path="/home" element={<Navigate to="/" />} />

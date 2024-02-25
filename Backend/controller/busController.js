@@ -190,7 +190,7 @@ const getAllBusesOfNum = async(req,res)=>{
     const driverInfo = await new Promise(
         (resolve,reject)=>{
         const driverData = []
-        var test = busId.length
+        let test = busId.length
         busId.forEach(async id => {
             console.log(id)
             var driver = await busModule.driverData(id['bus_id'])

@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/index.css";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 export default function BusesInfo({ bus, setBus }) {
     // await axios.get(`http://127.0.0.1:8000/bus/${dest}/${location}`) 
-  
     let locationValue = bus['location']? bus['location']:"" 
     let destVlaue= bus['destination']? bus['destination']:""
+    let dataValue = bus['bus']?bus['bus']:[]
     let [dest, setDest] = useState('')
     const [places, setPlaces] = useState([])
     const [search, setSearch] = useState('')
-    let [data, setData] = useState([])
+    let [data, setData] = useState(dataValue)
     let [location, setLocation] = useState('')
     const [test,setTest] = useState(0)
+    
     // if(locationValue && destVlaue){
     // places.map(item =>{
     //     if(item['place_id']==locationValue){
@@ -69,9 +71,16 @@ export default function BusesInfo({ bus, setBus }) {
         console.log(dest2)
         array(location2[0]['place_id'],dest2[0]['place_id'])
     }
-    useEffect(() => {
-        
-    }, [search])
+    
+    const placesStyle=
+        { 
+            WebkitLineClamp:3,
+            WebkitBoxOrient:'vertical',
+            "overflow-y":"auto" ,
+            display:'-webkit-box',
+            width:"105%"
+        }
+   
     useEffect(() => {
         if(locationValue!=''  && destVlaue!='' ){
         let location2 =parseInt (bus['location'])
@@ -87,18 +96,16 @@ export default function BusesInfo({ bus, setBus }) {
 
     }, [])
     useEffect(()=>{
-        console.log(test)
-    },test)
-    console.log(test)
+    },[test])
     console.log(data)
     if(test){
     return (
-        <>
+        <div className="scroll">
             <Navbar black={"bg-black"} />
             <div className="searchCon text-center ">
                 <input type="search" placeholder="search by number of bus" className="search" onChange={handleSearch} />
             </div>
-            <div className="grid pb-[3%] box-border pl-5 sgrid pt-8 bg-black grid-cols-4">
+            <div className="grid pb-[3%] box-border pl-5 pt-8 bg-black grid-cols-4">
                 <div className="div">
                     <h1 className="trip text-black text-center ">
                         Find trip
@@ -124,29 +131,28 @@ export default function BusesInfo({ bus, setBus }) {
 
                     { 
                     
-                    data!='no buses found' && data?
+                    data!='no buses found' ?
                     data.filter(i => {
                        i.places=i.places.toString()
                         console.log(i.places)
                         return search == '' && location=='' ? i : String(i.bus_number).includes(search ) && String(i.places).includes(location) && String(i.places).includes(dest)
                      })//
                         .map(item => {
-
-
                             return (
-                                <div className="col card py-[4%] px-[5%] grid grid-cols-1">
-                                    <p className="col circule text-center py-4   ">{item.bus_number}</p>
+                                <Link to={'/user'} key={item.bus_number} className="col card py-[4%] px-[5%] grid grid-cols-1">
+                                    <p className="col circule text-center py-4  ">{item.bus_number}</p>
 
                                     <span className="line col col-12 mt-[3%] ">cost</span>
                                     <p className="col text ">5 EGP</p>
 
-
                                     <span className="line col col-12 mt-[3%] ">trafic</span>
-                                    <p className="col text ">
+                                    <p className="col text scroll2" 
+                                    style={item.places.length<20?null:placesStyle}>
                                         {item.places}
+                                         
                                     </p>
-
-                                </div>
+                                    
+                                </Link>
                             )
                         }):<div className="noTripDiv text-center col-span-3 self-center "> 
                             <h1 className="noTripH  ">
@@ -160,7 +166,7 @@ export default function BusesInfo({ bus, setBus }) {
                 
                 </div>
             </div>
-        </>
+        </div>
     )
 }else{
     return <p>loading</p>

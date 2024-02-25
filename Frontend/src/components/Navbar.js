@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
-import NavUser from "./user/NavUser";
+// import NavUser from "./user/NavUser";
 
 function Navbar({ black }) {
   const navigate = useNavigate()
