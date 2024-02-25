@@ -3,7 +3,7 @@ import "../styles/index.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function FirstSection({ bus,setBus }) {
+function FirstSection({ bus, setBus }) {
   const [data, setData] = useState([]);
   // const [bus, setBus] = useState([]);
   const [location, setlocation] = useState("");
@@ -21,22 +21,27 @@ function FirstSection({ bus,setBus }) {
     });
     console.log(destination);
     console.log(locationId.place_id);
-    const res = await axios.get(
-      `http://127.0.0.1:8000/all/buses/${locationId.place_id}/${destination}`
-    ).then((res)=>{
-      setBus(bus ={
-      bus: res.data,
-      destination: destination,
-      location: locationId.place_id,
-    });});
-    console.log(res.data);
-    
+    const res = await axios
+      .get(
+        `http://127.0.0.1:8000/all/buses/${locationId.place_id}/${destination}`
+      )
+      .then((res) => {
+        setBus(
+          (bus = {
+            bus: res.data,
+            destination: destination,
+            // destinationId: destinationId,
+            location: location,
+            locationId: locationId,
+          })
+        );
+      });
   };
   useEffect(() => {
     getdata();
   }, []);
   useEffect(() => {
-    console.log(data);
+    console.log("data");
   }, [data]);
   const handleLocationInput = (e) => {
     setlocation(e.target.value);
@@ -45,6 +50,7 @@ function FirstSection({ bus,setBus }) {
     setdest(e.target.value);
   };
   const handleform = () => {
+    console.log("handleform");
     getBuses(dest, location);
   };
   return (
@@ -77,27 +83,25 @@ function FirstSection({ bus,setBus }) {
               return <option value={item["place_name"]} key={i} />;
             })}
           </datalist>
-          <select
+          <input
+            list="brow2"
+            type="text"
             value={dest}
-            name="dest"
+            name="location"
             onChange={handledestInput}
-            type="select"
-            placeholder="destination"
-            className="   block w-full px-3 mt-4 py-2 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400
+            placeholder="Enter Destination"
+            className="   block w-full px-3 mt-5 py-2 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
             invalid:border-pink-500 invalid:text-pink-600
-            focus:invalid:border-pink-500 focus:invalid:ring-black-500
+            focus:invalid:border-pink-500 focus:invalid:ring-pink-500
             "
-          >
-            {data.map((itme, i) => {
-              return (
-                <option value={itme["place_id"]} key={i}>
-                  {itme["place_name"]}
-                </option>
-              );
+          />
+          <datalist id="brow2">
+            {data.map((item, i) => {
+              return <option value={item["place_name"]} key={i} />;
             })}
-          </select>
+          </datalist>
           <Link
             type="button"
             onClick={handleform}

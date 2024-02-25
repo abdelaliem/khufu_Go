@@ -6,7 +6,7 @@ import Spinner from "../components/Spinner";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-function UserDashboard({ busNum = 1, busPath }) {
+function UserDashboard({ busNum, setRequested }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
   const navigate = useNavigate();
   const mapContainer = useRef(null);
@@ -23,7 +23,24 @@ function UserDashboard({ busNum = 1, busPath }) {
 
   async function getbusesData() {
     const res = await axios.get(`http://127.0.0.1:8000/bus/${busNum}`);
-    setBusesData((busesData = res.data));
+    setBusesData(res.data);
+
+    res.data.forEach((item) => {
+      const marker = new mapboxgl.Marker({ color: "green" })
+        .setLngLat([item.lang, item.lat])
+        .addTo(map.current);
+
+      // const popup = new mapboxgl.Popup({
+      //   offset: 25,
+      //   maxWidth: "100px",
+      //   maxHeight: "20px",
+      // }).setHTML(`<h3>Bus ${busNum}</h3>`);
+
+      marker.getElement().addEventListener("click", (e) => {
+        setRequested(item);
+        navigate("/businfo");
+      });
+    });
   }
 
   useEffect(() => {
@@ -34,9 +51,9 @@ function UserDashboard({ busNum = 1, busPath }) {
         center: [0, 0],
         zoom: zoom,
       });
-      mapboxgl.setRTLTextPlugin(
-        "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js"
-      );
+      // mapboxgl.setRTLTextPlugin(
+      //   "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js"
+      // );
     }
     console.log("here");
     let intervalId = setInterval(() => {
@@ -45,8 +62,10 @@ function UserDashboard({ busNum = 1, busPath }) {
       } else {
         console.log("Geolocation not supported");
       }
-
-      getbusesData();
+      if (busNum) {
+        getbusesData();
+      } else {
+      }
       async function success(position) {
         setUserLocation({
           lat: position.coords.latitude,
@@ -60,7 +79,7 @@ function UserDashboard({ busNum = 1, busPath }) {
         setErr((err = "Unable to retrieve your location"));
         console.log(userLocation);
       }
-    }, 5000);
+    }, 15000);
     return () => clearInterval(intervalId);
   }, [userLocation]);
   useEffect(() => {
@@ -71,27 +90,12 @@ function UserDashboard({ busNum = 1, busPath }) {
         maxWidth: "100px",
         maxHeight: "20px",
       }).setHTML("<h3>Your position</h3>");
-      const markerBusesPopup = new mapboxgl.Popup({
-        offset: 25,
-        maxWidth: "100px",
-        maxHeight: "20px",
-      });
       new mapboxgl.Marker()
         .setLngLat([userLocation.lng, userLocation.lat])
         .addTo(map.current)
         .setPopup(markerUserPopup)
         .togglePopup()
-        .getElement();
-      // .addEventListener("click", () => {
-      //   navigate('/home');
-      // });
-      busesData?.map((item) => {
-        new mapboxgl.Marker({ color: "green" })
-          .setLngLat([item.lng, item.lat])
-          .addTo(map.current)
-          .setPopup(markerBusesPopup)
-          .setHTML(`<h3>Bus ${busNum}</h3>`);
-      });
+        .getElement()
     }
   }, [isLoading]);
 
@@ -103,13 +107,19 @@ function UserDashboard({ busNum = 1, busPath }) {
           {err}
         </div>
       ) : (
-      <div className=" overflow-hidden">
-        {isLoading ? "" : <Spinner></Spinner>}
-        <div
-          ref={mapContainer}
-          className={`map-container m-2 ${isLoading ? "" : "opacity-0"} `}
-        />
-      </div>
+        <div className=" overflow-hidden">
+          <div className="p-4  text-lg text-center rounded-lg bg-green-50 dark:bg-gray-800 dark:text-red-400">
+            The Buses Represented with the Green flag pick the Nearest one to
+            You
+          </div>
+          {isLoading ? "" : <Spinner></Spinner>}
+          <div
+            ref={mapContainer}
+            className={`map-container m-2 mt-0 ${
+              isLoading ? "" : "opacity-0"
+            } `}
+          />
+        </div>
       )}
     </>
   );

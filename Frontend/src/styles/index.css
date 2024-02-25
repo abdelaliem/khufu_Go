@@ -14,10 +14,10 @@
 * {
   font-family: "Rubik", sans-serif;
 }
- 
+
 .scroll {
-height: 100%;
-overflow : auto; /* add a vertical scrollbar */
+  height: 100%;
+  overflow: auto; /* add a vertical scrollbar */
 }
 
 .scroll::-webkit-scrollbar {
@@ -26,37 +26,35 @@ overflow : auto; /* add a vertical scrollbar */
 }
 
 .scroll::-webkit-scrollbar-track {
- 
-  background:black; /* color of the tracking area */
+  background: black; /* color of the tracking area */
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  background-color:#FFCB50; /* color of the scroll thumb */
+  background-color: #ffcb50; /* color of the scroll thumb */
   border-radius: 10px; /* roundness of the scroll thumb */
- 
-   /* creates padding around scroll thumb */
+
+  /* creates padding around scroll thumb */
 }
 .scroll2 {
   height: 100%;
-  overflow : auto; /* add a vertical scrollbar */
-  }
-  
-  .scroll2::-webkit-scrollbar {
-    height: 20px;
-    width: 8px; /* width of the entire scrollbar */
-  }
-  
-  .scroll2::-webkit-scrollbar-track {
-   
-    background:black; /* color of the tracking area */
-  }
-  
-  .scroll2::-webkit-scrollbar-thumb {
-    background-color:wheat; /* color of the scroll thumb */
-    border-radius: 5px; /* roundness of the scroll thumb */
-   
-     /* creates padding around scroll thumb */
-  }
+  overflow: auto; /* add a vertical scrollbar */
+}
+
+.scroll2::-webkit-scrollbar {
+  height: 20px;
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.scroll2::-webkit-scrollbar-track {
+  background: black; /* color of the tracking area */
+}
+
+.scroll2::-webkit-scrollbar-thumb {
+  background-color: wheat; /* color of the scroll thumb */
+  border-radius: 5px; /* roundness of the scroll thumb */
+
+  /* creates padding around scroll thumb */
+}
 .container0 {
   width: 100%;
   background-color: black;
@@ -117,24 +115,24 @@ body {
   margin-top: 10px;
 }
 .card {
-  height:300px;
-  border: #CBCBCB solid 1px;
-  background-color:#130D00;
+  height: 300px;
+  border: #cbcbcb solid 1px;
+  background-color: #130d00;
   border-radius: 15px;
 }
 
-.card:hover {
+/* .card:hover {
   box-shadow: 5px 3px 24px 10px rgba(128, 127, 127, 0.457);
   cursor: pointer;
   width: 105%;
-}
+} */
 .line {
   color: rgba(128, 128, 128, 0.801);
   border-bottom: #f6f6f668 solid 0.5px;
   border-top-color: white;
 }
 .circule {
-  background-color:#FFCB50;
+  background-color: #ffcb50;
   width: 59px;
   height: 59px;
   border-radius: 100%;
@@ -145,70 +143,67 @@ body {
 .conCard {
   box-sizing: content-box;
 }
-.search{
+.search {
   width: 40rem;
   padding: 0.5%;
   border: white;
   border-radius: 15px;
-  
+
   margin-top: 1%;
-  padding-left:1rem;
+  padding-left: 1rem;
 }
-.input{
+.input {
   border: none;
   color: #000000;
-  background-color:#FFCB50;
+  background-color: #ffcb50;
   border-bottom: #000000 1px solid;
   margin-left: 1.5rem;
   margin-top: 6rem;
 }
-.input::placeholder{
+.input::placeholder {
   color: #000000;
   font-weight: bolder;
 }
-.input:focus{
-  outline:none;
+.input:focus {
+  outline: none;
 }
 
-.searchCon{
-   background-color:black;
-    
+.searchCon {
+  background-color: black;
 }
-.search input{
+.search input {
   border: 0;
-  outline:none;
-}
-.search:focus{
   outline: none;
-  box-shadow: 0px -1px 22px 4px rgba(247,213,102,0.70);
 }
-.sgrid{
+.search:focus {
+  outline: none;
+  box-shadow: 0px -1px 22px 4px rgba(247, 213, 102, 0.7);
+}
+.sgrid {
   height: max-content;
 }
-.div{
-  border: #0D0D0D solid 1px;
+.div {
+  border: #0d0d0d solid 1px;
   border-radius: 15px;
-  height:35rem;
-  background-color: #FFCB50;
+  height: 35rem;
+  background-color: #ffcb50;
   color: #000000;
 }
-.trip{
-   
+.trip {
   font-weight: bolder;
   margin-top: 6rem;
 }
-.clickbtn{
+.clickbtn {
   border-radius: 15px;
   width: 10rem;
 }
-.noTripH{
+.noTripH {
   font-weight: 400;
   font-size: 48px;
-  color: #8B8B8B;
+  color: #8b8b8b;
 }
-.noTripP{
- font-weight: 400;
- font-size: 24px;
- color: #8B8B8B;
+.noTripP {
+  font-weight: 400;
+  font-size: 24px;
+  color: #8b8b8b;
 }
- 
