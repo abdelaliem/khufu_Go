@@ -13,7 +13,7 @@ module.exports = {
         const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/g;
         const phonePattern = /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$/;
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-
+        const name = /^[a-zA-Z]{3,10}$/
         const validationErrors = [];
 
         if (!phonePattern.test(phone)) {
@@ -30,8 +30,8 @@ module.exports = {
             );
         }
 
-        if (!firstName || !secondName) {
-            validationErrors.push("Please enter your first and second name");
+        if (!firstName || !secondName || !name.test(firstName) || !name.test(secondName)) {
+            validationErrors.push("invalid first or second name");
         }
 
         if (validationErrors.length > 0) {
