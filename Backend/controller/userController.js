@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/UserModel");
+const DriverMdoel = require('../models/DriverModel')
 const jwt = require("jsonwebtoken");
-const createToken = (id) => {
-    return jwt.sign({ id }, "sultan is develober", {
+const createToken = (id , type) => {
+    return jwt.sign({ id ,type }, "sultan is develober", {
         expiresIn: 3 * 24 * 60 * 60,
     });
 };
@@ -61,19 +62,31 @@ module.exports = {
         }
     },
     login: async (req, res) => {
-        const { email, password } = req.body;
-        const user = await UserModel.where("email", email).first();
-        if (user == null) {
-            res.send("email is wrong");
-        } else {
-            const auth = await bcrypt.compare(password, user.password);
-            if (!auth) {
-                res.send("password is wrong");
+        if (req.params.type == "user") {
+            const { email, password } = req.body;
+            const user = await UserModel.where("email", email).first();
+            if (user == null) {
+                res.send("email is wrong");
             } else {
-                const token = createToken(user.id);
+                const auth = await bcrypt.compare(password, user.password);
+                if (!auth) {
+                    res.send("password is wrong");
+                } else {
+                    const token = createToken(user.id ,req.params.type);
+                    res.send({ token });
+                }
+            }
+        }else if(req.params.type == "driver"){
+            const { code } = req.body;
+            const user = await DriverMdoel.where("code", code).first();
+            if (user == null) {
+                res.send("code is wrong");
+            } else {
+                const token = createToken(user.id ,req.params.type);
                 res.send({ token });
             }
         }
+
     },
     userInfo: (req, res) => {
         jwt.verify(
@@ -83,8 +96,14 @@ module.exports = {
                 if (err) {
                     res.send(err.message);
                 } else {
-                    const data = await UserModel.findById(decodedToken["id"]);
-                    res.send(data);
+                    if (decodedToken["type"]=="user") {
+                        const data = await UserModel.findById(decodedToken["id"]);
+                        res.send({...data,type:decodedToken["type"]});
+                    }
+                    else if(decodedToken["type"]=="driver"){
+                        const data = await DriverMdoel.findById(decodedToken["id"]);
+                        res.send({...data,type:decodedToken["type"]});
+                    }
                 }
             }
         );
