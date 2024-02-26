@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link , useNavigate} from "react-router-dom";
-// import NavUser from "./user/NavUser";
+import { Link } from "react-router-dom";
+
 
 function Navbar({ black }) {
-  const navigate = useNavigate()
   const [xs,setXs] = useState()
   const isExpired = async ()=>{
     const {data} = await axios.get(`http://localhost:8000/user/userinfo/${localStorage.getItem("xs")}`)
@@ -12,14 +11,14 @@ function Navbar({ black }) {
   }
   useEffect(()=>{
     isExpired()
-  })
+  },[])
   return (
     <nav
       className={`w-ful flex py-2 p-4 justify-between items-center ${
         black ? "bg-black" : ""
       } `}
     >
-      <div className="w-ful flex  justify-start items-center">
+      <div className="w-ful flex justify-start items-center">
         <div className="font-[500] text-[30px] text-white"><span style={{color:"#FFCB50"}}>Khufu</span> GO</div>
         <div className="ps-3">
           <ul className="list-none sm:flex justify-end items-center flex-1 hidden">
@@ -49,13 +48,13 @@ function Navbar({ black }) {
       :xs?[
         <div style={{display:"flex" ,justifyContent:"center" , alignItems:"center" , marginRight:"10px"}}>
           <div style={{color:"black" , backgroundColor:"white" , borderRadius:"15px" , padding:"5px" , cursor:"pointer"}}>
-              {xs.firstName[0].toUpperCase()}
-              {xs.secondName[0].toUpperCase()}
+              {xs?.firstName[0].toUpperCase()}
+              {xs?.secondName[0].toUpperCase()}
           </div>
           <svg class="w-2.5 h-2.5 ms-3" style={{color:"white" ,cursor:"pointer" }}aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
           </svg>
-        </div>]:""}
+        </div>]:"reload"}
     </nav>
   );
 }
