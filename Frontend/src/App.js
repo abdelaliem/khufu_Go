@@ -12,6 +12,7 @@ import { useState } from "react";
 import Signup from "./pages/Signup";
 import BusInfo from "./pages/BusInfo";
 import Requested from "./pages/Requested";
+import Type from "./components/user/Type.jsx"
 
 function App() {
   let [bus, setBus] = useState({});
@@ -28,7 +29,8 @@ function App() {
             <BusesInfo bus={bus} setBus={setBus} setBusNum={setBusNum} />
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login/:type" element={<Login/>} />
+        <Route path="/type" element={<Type />} />
         <Route path="/register" element={<Signup />} />
         <Route
           path="/user"
