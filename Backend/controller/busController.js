@@ -52,7 +52,7 @@ const getBusData =  async (req,res)=>{
             const [busNum] = await busModule.getBusNumByBusID(driver['bus_id'])
             driver['bus_num']=busNum['bus_number']
             var [placesId] = await busModule.getBusPlaces(busNum['bus_number']);
-            placesId  = placesId['placesId'].split(',')
+            placesId = placesId['placesId'].split(',')
             var checkIfLocationExist = placesId.includes(String(locationId))
             const place = await new Promise((resolve,reject)=>{
             var placesName = []
@@ -186,13 +186,13 @@ else{
 const getAllBusesOfNum = async(req,res)=>{
     const num = parseInt(req.params.num)
     const busId = await busModule.getBusId(num)
-    console.log(busId)
+    // console.log(busId)
     const driverInfo = await new Promise(
         (resolve,reject)=>{
         const driverData = []
         let test = busId.length
         busId.forEach(async id => {
-            console.log(id)
+            // console.log(id)
             var driver = await busModule.driverData(id['bus_id'])
             if(driver.length>0){
                  driverData.push(driver[0])

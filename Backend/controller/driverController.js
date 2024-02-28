@@ -13,6 +13,7 @@ const bookUsers = async(req,res)=>{
     try {
         const busId = parseInt(req.body.bus_id)
         const userId = parseInt(req.body.user_id)
+        // console.log(busId,userId)
         const updateUsers = await driver.applyBooks(userId,busId)
         res.send(updateUsers)
     } catch (error) {
@@ -39,4 +40,15 @@ const bookDone = async (req,res)=>{
         console.log(error)
     }
 }
-module.exports = {Users,bookUsers,cancelBook,bookDone}
+const UpdateBusLocation = async (req,res)=>{
+    try {
+        const busId = req.body.bus_id
+        const lat = req.body.lat
+        const lang = req.body.lang
+        const done = await driver.UpdateBusLocation(lat,lang,busId)
+        res.send(done)
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = {Users,bookUsers,cancelBook,bookDone,UpdateBusLocation}

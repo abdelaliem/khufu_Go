@@ -8,8 +8,8 @@ export default function BusesInfo({ bus, setBusNum }) {
   const [places, setPlaces] = useState([]);
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
-  const [location, setLocation] = useState(bus?.location || "");
-  const [dest, setDest] = useState(bus?.destination || "");
+  const [location, setLocation] = useState("");
+  const [dest, setDest] = useState("");
   const [test, setTest] = useState(false);
 
   const handleSearch = (e) => {
@@ -38,15 +38,6 @@ export default function BusesInfo({ bus, setBusNum }) {
     }
   };
 
-  const getPlaces = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/places");
-      setPlaces(response.data);
-    } catch (error) {
-      console.error("Error fetching places:", error);
-    }
-  };
-
   const handleDistLocation = () => {
     let locationId = places.find(
       (place) => place.place_name === location
@@ -58,12 +49,24 @@ export default function BusesInfo({ bus, setBusNum }) {
     }
   };
 
-  useEffect(() => {
-    if (bus?.location && bus?.destination) {
-      array(bus.destination, bus.location);
-    } else {
-      array();
+  const getPlaces = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/places");
+      setPlaces(response.data);
+      console.log(bus);
+      if (bus?.location && bus?.destination) {
+        console.log("here");
+        setLocation(bus.location);
+        setDest(bus.destination);
+        handleDistLocation();
+      }
+    } catch (error) {
+      console.error("Error fetching places:", error);
     }
+  };
+
+  useEffect(() => {
+    getPlaces();
   }, []);
   useEffect(() => {
     const fetchData = async () => {
@@ -86,7 +89,7 @@ export default function BusesInfo({ bus, setBusNum }) {
         } else {
           response = await axios.get("http://127.0.0.1:8000/all/buses");
         }
-
+        console.log(response);
         setData(response.data);
         setTest(true);
       } catch (error) {
@@ -95,21 +98,7 @@ export default function BusesInfo({ bus, setBusNum }) {
     };
 
     fetchData();
-  }, [location, dest]);
-
-  useEffect(() => {
-    console.log("Data updated:", data);
-  }, [data]);
-
-  useEffect(() => {
-    getPlaces();
-  }, []);
-
-  useEffect(() => {
-    console.log(test);
-  }, [test]);
-
-  console.log(data);
+  }, [location, dest, places]);
 
   if (test) {
     return (

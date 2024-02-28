@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../styles/index.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function FirstSection({ bus, setBus }) {
-  const [data, setData] = useState([]);
+function FirstSection({ bus, setBus, setSearch }) {
+  let [data, setData] = useState([]);
   // const [bus, setBus] = useState([]);
-  const [location, setlocation] = useState("");
-  const [dest, setdest] = useState("");
+  let [location, setlocation] = useState("");
+  let [dest, setdest] = useState("");
+  let navigate = useNavigate();
 
   const getdata = async () => {
     const res = await axios.get("http://127.0.0.1:8000/places");
@@ -35,6 +36,7 @@ function FirstSection({ bus, setBus }) {
             locationId: locationId,
           })
         );
+        navigate("/bus");
       });
   };
   useEffect(() => {
@@ -102,14 +104,13 @@ function FirstSection({ bus, setBus }) {
               return <option value={item["place_name"]} key={i} />;
             })}
           </datalist>
-          <Link
+          <button
             type="button"
             onClick={handleform}
-            className=" w-[150px] m-auto text-center pt-2 h-[40px] mt-8 bg-black rounded-lg text-white"
-            to={"/bus"}
+            className=" w-[150px] m-auto text-center h-[40px] mt-8 bg-black rounded-lg text-white"
           >
             <span className=" text-[#FFCB50]">See </span> Buses
-          </Link>
+          </button>
         </form>
       </div>
     </div>

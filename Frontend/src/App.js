@@ -18,15 +18,16 @@ function App() {
   let [bus, setBus] = useState({});
   let [busNum, setBusNum] = useState(null);
   let [requested, setRequested] = useState(null);
+  let [search,setSearch] = useState({})
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage bus={bus} setBus={setBus} />} />
+        <Route path="/" element={<HomePage bus={bus} setBus={setBus} setSearch={setSearch} />} />
         <Route path="/about" element={<AboutUs />} />
         <Route
           path="/bus"
           element={
-            <BusesInfo bus={bus} setBus={setBus} setBusNum={setBusNum} />
+            <BusesInfo bus={bus} setBus={setBus} setBusNum={setBusNum} search1={search} />
           }
         />
         <Route path="/login/:type" element={<Login/>} />
@@ -42,12 +43,11 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/error404" element={<Error404 />} />
         <Route path="/home" element={<Navigate to="/" />} />
-        <Route path="/busesInfo" element={<BusesInfo />} />
         <Route
           path="/businfo"
           element={<BusInfo requested={requested} busNum={busNum} />}
         />
-        <Route path="/requested" element={<Requested />} />
+        <Route path="/requested" element={<Requested requested={requested} />} />
         <Route path="*" element={<Navigate to="/error404" />} />
       </Routes>
     </>

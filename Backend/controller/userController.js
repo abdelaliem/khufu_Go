@@ -111,8 +111,9 @@ module.exports = {
     updateLatLang:(req,res)=>{
         const lat = req.body.lat
         const lang = req.body.lang
+        const token = req.body.token
         jwt.verify(
-            req.params.token,
+            token,
             "sultan is develober",
             async (err, decodedToken) => {
                 if (err) {

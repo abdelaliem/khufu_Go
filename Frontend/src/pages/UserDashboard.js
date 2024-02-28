@@ -7,8 +7,24 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 function UserDashboard({ busNum, setRequested }) {
-  mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
+  let [xs, setXs] = useState(null);
   const navigate = useNavigate();
+  const isExpired = async () => {
+    const { data } = await axios.get(
+      `http://localhost:8000/user/userinfo/${localStorage.getItem("xs")}`
+    );
+    setXs(data);
+    if (data == "jwt expired" || localStorage.getItem("xs") == undefined) {
+      navigate("/type");
+    }else if(data.type != 'user'){
+      navigate("/home");
+    }
+  };
+  useEffect(() => {
+    isExpired();
+  }, []);
+
+  mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
   const mapContainer = useRef(null);
   const map = useRef(null);
   let [zoom, setZoom] = useState(14);
@@ -20,6 +36,11 @@ function UserDashboard({ busNum, setRequested }) {
     lng: null,
     access: false,
   });
+
+  async function updateUserLocationInDB(){
+    const res = await axios.put(`http://127.0.0.1:8000/updatelatlang/`,{lat:userLocation.lat,lang:userLocation.lng,token:localStorage.getItem("xs")});
+    console.log(res);
+  }
 
   async function getbusesData() {
     const res = await axios.get(`http://127.0.0.1:8000/bus/${busNum}`);
@@ -37,7 +58,8 @@ function UserDashboard({ busNum, setRequested }) {
       // }).setHTML(`<h3>Bus ${busNum}</h3>`);
 
       marker.getElement().addEventListener("click", (e) => {
-        setRequested(item);
+        setRequested({bus:item,user:xs});
+        updateUserLocationInDB()
         navigate("/businfo");
       });
     });
@@ -79,7 +101,7 @@ function UserDashboard({ busNum, setRequested }) {
         setErr((err = "Unable to retrieve your location"));
         console.log(userLocation);
       }
-    }, 15000);
+    }, 5000);
     return () => clearInterval(intervalId);
   }, [userLocation]);
   useEffect(() => {
@@ -95,7 +117,7 @@ function UserDashboard({ busNum, setRequested }) {
         .addTo(map.current)
         .setPopup(markerUserPopup)
         .togglePopup()
-        .getElement()
+        .getElement();
     }
   }, [isLoading]);
 

@@ -15,8 +15,15 @@ function Navbar({ black }) {
       setDisplay("none");
     }
   };
-  const handleLogout = ()=>{
-    localStorage.removeItem("xs")
+  const handleLogout = () => {
+    localStorage.removeItem("xs");
+  };
+  function handleProfile(){
+    if (xs.type == 'user'){
+      navigate('/user')
+    }else if(xs.type == 'driver'){
+      navigate('/driver')
+    }
   }
   const isExpired = async () => {
     const { data } = await axios.get(
@@ -89,7 +96,7 @@ function Navbar({ black }) {
                 {xs.secondName[0].toUpperCase()}
               </div>
               <svg
-                class="w-2.5 h-2.5 ms-3"
+                className="w-2.5 h-2.5 ms-3"
                 style={{ color: "white", cursor: "pointer" }}
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,11 +112,13 @@ function Navbar({ black }) {
                 />
               </svg>
               <ul className={Style.menu} style={{ display }}>
-                <li className={Style.menuItem}>
-                  <button style={{color:"red"}} onClick={handleLogout}>Logout</button>
-                </li>
                 <li className="menu-item">
-                  <button>profile</button>
+                  <button onClick={()=>handleProfile()}>profile</button>
+                </li>
+                <li className={Style.menuItem}>
+                  <button style={{ color: "red" }} onClick={handleLogout}>
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>,
