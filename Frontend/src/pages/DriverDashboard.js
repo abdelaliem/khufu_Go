@@ -46,10 +46,10 @@ function DriverDashboard() {
         .addTo(map.current);
     });
   }
-  // async function updateDriverLocation(){
-  //   const res = await axios.put(`http://127.0.0.1:8000/updateLat/${localStorage.getItem('xs')}`,{bus_id:xs?.bus_id,lat:userLocation.lat,lang:userLocation.lng});
-  //   console.log(res);
-  // }
+  async function updateDriverLocation(){
+    const res = await axios.put(`http://127.0.0.1:8000/updatelatlang`,{bus_id:xs?.bus_id,lat:userLocation.lat,lang:userLocation.lng});
+    console.log(res);
+  }
 
   useEffect(() => {
     if (!map.current) {
@@ -78,7 +78,7 @@ function DriverDashboard() {
         });
         setIsLoading((isLoading = true));
         setIsLoading2(!isLoading2);
-        // updateDriverLocation()
+        updateDriverLocation()
         console.log(userLocation);
       }
       function error() {

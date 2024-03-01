@@ -16,7 +16,7 @@ function UserDashboard({ busNum, setRequested }) {
     setXs(data);
     if (data == "jwt expired" || localStorage.getItem("xs") == undefined) {
       navigate("/type");
-    }else if(data.type != 'user'){
+    } else if (data.type != "user") {
       navigate("/home");
     }
   };
@@ -37,9 +37,14 @@ function UserDashboard({ busNum, setRequested }) {
     access: false,
   });
 
-  async function updateUserLocationInDB(){
-    const res = await axios.put(`http://127.0.0.1:8000/updatelatlang/`,{lat:userLocation.lat,lang:userLocation.lng,token:localStorage.getItem("xs")});
+  async function updateUserLocationInDB() {
+    const res = await axios.put(`http://127.0.0.1:8000/updatelatlanguser`, {
+      lat: userLocation.lat,
+      lang: userLocation.lng,
+      userId: xs.id,
+    });
     console.log(res);
+    navigate("/businfo");
   }
 
   async function getbusesData() {
@@ -58,9 +63,8 @@ function UserDashboard({ busNum, setRequested }) {
       // }).setHTML(`<h3>Bus ${busNum}</h3>`);
 
       marker.getElement().addEventListener("click", (e) => {
-        setRequested({bus:item,user:xs});
-        updateUserLocationInDB()
-        navigate("/businfo");
+        setRequested({ bus: item, user: xs });
+        updateUserLocationInDB();
       });
     });
   }

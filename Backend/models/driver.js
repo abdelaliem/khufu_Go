@@ -70,10 +70,23 @@ const UpdateBusLocation = (lat, lang, busId) => {
     });
   });
 };
+const UpdateUserLocation = (lat, lang, userId) => {
+  return new Promise((resolve, reject) => {
+    const quary = "UPDATE `users` SET `lang`=?,`lat`=? WHERE `id` = ?";
+    con.query(quary, [lang, lat, userId], (err, data) => {
+      if (data) {
+        resolve("data updated successfully");
+      } else {
+        reject("data didn't updated");
+      }
+    });
+  });
+};
 module.exports = {
   bookUsers,
   applyBooks,
   cancelAplly,
   bookDone,
   UpdateBusLocation,
+  UpdateUserLocation
 };

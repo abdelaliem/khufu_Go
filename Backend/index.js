@@ -30,6 +30,7 @@ app.put("/cancelBooks", driverRoute);
 // route to mark the book as done by the driver (pass an user_id in the body)
 app.put("/doneBooks", driverRoute);
 app.put("/updatelatlang",driverRoute)
+app.put("/updatelatlanguser",driverRoute)
 
 // running the backend
 app.listen(8000, () => {

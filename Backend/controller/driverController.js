@@ -51,4 +51,15 @@ const UpdateBusLocation = async (req,res)=>{
         console.log(error)
     }
 }
-module.exports = {Users,bookUsers,cancelBook,bookDone,UpdateBusLocation}
+const UpdateUserLocation = async (req,res)=>{
+    try {
+        const userId = req.body.userId
+        const lat = req.body.lat
+        const lang = req.body.lang
+        const done = await driver.UpdateUserLocation(lat,lang,userId)
+        res.send(done)
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = {Users,bookUsers,cancelBook,bookDone,UpdateBusLocation,UpdateUserLocation}
