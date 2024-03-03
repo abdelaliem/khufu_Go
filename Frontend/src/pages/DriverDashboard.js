@@ -23,6 +23,7 @@ function DriverDashboard() {
   useEffect(() => {
     isExpired();
   }, []);
+
   mapboxgl.accessToken = process.env.REACT_APP_MAP_ACCESS_TOKEN;
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -41,9 +42,11 @@ function DriverDashboard() {
       `http://127.0.0.1:8000/bookedUsers/${xs?.bus_id}`
     );
     res.data.forEach((item) => {
-      new mapboxgl.Marker({ color: "green" })
+      const marker = new mapboxgl.Marker({ color: "green" })
         .setLngLat([item.lang, item.lat])
         .addTo(map.current);
+
+        setMarkers((prevArray) => [...prevArray, marker]);
     });
   }
   async function updateDriverLocation(){

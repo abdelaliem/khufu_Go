@@ -29,8 +29,10 @@ function UserDashboard({ busNum, setRequested }) {
   const map = useRef(null);
   let [zoom, setZoom] = useState(14);
   let [err, setErr] = useState("");
-  let [isLoading, setIsLoading] = useState(false);
   let [busesData, setBusesData] = useState();
+  let [markers, setMarkers] = useState([]);
+  let [isLoading, setIsLoading] = useState(false);
+  let [isLoading2, setIsLoading2] = useState(false);
   let [userLocation, setUserLocation] = useState({
     lat: null,
     lng: null,
@@ -46,6 +48,13 @@ function UserDashboard({ busNum, setRequested }) {
     console.log(res);
     navigate("/businfo");
   }
+  async function updateUserLocationInDB2() {
+    const res = await axios.put(`http://127.0.0.1:8000/updatelatlanguser`, {
+      lat: userLocation.lat,
+      lang: userLocation.lng,
+      userId: xs.id,
+    });
+  }
 
   async function getbusesData() {
     const res = await axios.get(`http://127.0.0.1:8000/bus/${busNum}`);
@@ -56,12 +65,7 @@ function UserDashboard({ busNum, setRequested }) {
         .setLngLat([item.lang, item.lat])
         .addTo(map.current);
 
-      // const popup = new mapboxgl.Popup({
-      //   offset: 25,
-      //   maxWidth: "100px",
-      //   maxHeight: "20px",
-      // }).setHTML(`<h3>Bus ${busNum}</h3>`);
-
+      setMarkers((prevArray) => [...prevArray, marker]);
       marker.getElement().addEventListener("click", (e) => {
         setRequested({ bus: item, user: xs });
         updateUserLocationInDB();
@@ -81,7 +85,6 @@ function UserDashboard({ busNum, setRequested }) {
       //   "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js"
       // );
     }
-    console.log("here");
     let intervalId = setInterval(() => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error);
@@ -99,6 +102,9 @@ function UserDashboard({ busNum, setRequested }) {
           access: true,
         });
         setIsLoading((isLoading = true));
+        setIsLoading((isLoading = true));
+        setIsLoading2(!isLoading2);
+        updateUserLocationInDB2();
         console.log(userLocation);
       }
       function error() {
@@ -111,19 +117,34 @@ function UserDashboard({ busNum, setRequested }) {
   useEffect(() => {
     if (map.current) {
       map.current.jumpTo({ center: [userLocation.lng, userLocation.lat] });
-      const markerUserPopup = new mapboxgl.Popup({
+    }
+  }, [isLoading]);
+  useEffect(() => {
+    if (map.current) {
+      console.log(markers);
+      if (markers.length > 0) {
+        markers.forEach(function (marker) {
+          marker.remove();
+        });
+        setMarkers([]);
+      }
+      // map.current.flyTo({ center: [userLocation.lng, userLocation.lat] });
+      const markerPopup = new mapboxgl.Popup({
         offset: 25,
         maxWidth: "100px",
         maxHeight: "20px",
       }).setHTML("<h3>Your position</h3>");
-      new mapboxgl.Marker()
+      let marker = new mapboxgl.Marker()
         .setLngLat([userLocation.lng, userLocation.lat])
         .addTo(map.current)
-        .setPopup(markerUserPopup)
-        .togglePopup()
+        .setPopup(markerPopup)
         .getElement();
+      // .addEventListener("click", () => {
+      //   navigate('/home');
+      // });
+      setMarkers((prevArray) => [...prevArray, marker]);
     }
-  }, [isLoading]);
+  }, [isLoading2]);
 
   return (
     <>

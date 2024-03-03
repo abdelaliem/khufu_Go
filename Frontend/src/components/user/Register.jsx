@@ -24,7 +24,7 @@ function Register() {
     setData(data);
     console.log(data);
     if (data == "signUp done") {
-      navigate("/login");
+      navigate("/login/user");
     }
   };
   useEffect(() => {
