@@ -112,7 +112,7 @@ export default function BusesInfo({ bus, setBusNum }) {
             onChange={handleSearch}
           />
         </div>
-        <div className="grid pb-3 box-border px-2 pt-8 lg:grid-cols-4 m-auto lg:m-0 xs:grid-cols-1">
+        <div className="grid pb-3 box-border px-2 pt-8 m-auto lg:m-0  md:grid-cols-4 xs:grid-cols-1">
           <div className="div sm:w-[60%] lg:w-[100%] mb-5 mx-auto">
             <h1 className="trip text-black text-center ">Find trip</h1>
 
