@@ -18,11 +18,11 @@ function Navbar({ black }) {
   const handleLogout = () => {
     localStorage.removeItem("xs");
   };
-  function handleProfile(){
-    if (xs.type == 'user'){
-      navigate('/user')
-    }else if(xs.type == 'driver'){
-      navigate('/driver')
+  function handleProfile() {
+    if (xs.type == "user") {
+      navigate("/user");
+    } else if (xs.type == "driver") {
+      navigate("/driver");
     }
   }
   const isExpired = async () => {
@@ -46,7 +46,7 @@ function Navbar({ black }) {
           <span style={{ color: "#FFCB50" }}>Khufu</span> GO
         </div>
         <div className="ps-3">
-          <ul className="list-none sm:flex justify-end items-center flex-1 hidden">
+          <ul className="list-none flex justify-end items-center flex-1 ">
             <li className="px-3 text-[18px] text-white">
               <Link to={"/home"}>Home</Link>
             </li>
@@ -62,7 +62,7 @@ function Navbar({ black }) {
       {localStorage.getItem("xs") == undefined || xs == "jwt expired"
         ? [
             <div>
-              <ul className="list-none sm:flex justify-end items-center flex-1 hidden">
+              <ul className="list-none flex justify-end items-center flex-1 ">
                 <li className="px-3 text-[18px] text-white">
                   <Link to={"/register"}>Sign Up</Link>
                 </li>
@@ -113,7 +113,7 @@ function Navbar({ black }) {
               </svg>
               <ul className={Style.menu} style={{ display }}>
                 <li className="menu-item">
-                  <button onClick={()=>handleProfile()}>profile</button>
+                  <button onClick={() => handleProfile()}>profile</button>
                 </li>
                 <li className={Style.menuItem}>
                   <button style={{ color: "red" }} onClick={handleLogout}>
