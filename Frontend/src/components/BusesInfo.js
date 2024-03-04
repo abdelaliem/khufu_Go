@@ -102,18 +102,18 @@ export default function BusesInfo({ bus, setBusNum }) {
 
   if (test) {
     return (
-      <div className="scroll">
+      <div className="scroll bg-black">
         <Navbar black={"bg-black"} />
         <div className="searchCon text-center ">
           <input
             type="search"
             placeholder="search by number of bus"
-            className="search"
+            className="search w-[70%]"
             onChange={handleSearch}
           />
         </div>
-        <div className="grid pb-[3%] box-border pl-5 pt-8 bg-black grid-cols-4">
-          <div className="div">
+        <div className="grid pb-3 box-border px-2 pt-8 lg:grid-cols-4 m-auto lg:m-0 xs:grid-cols-1">
+          <div className="div sm:w-[60%] lg:w-[100%] mb-5 mx-auto">
             <h1 className="trip text-black text-center ">Find trip</h1>
 
             <input
@@ -141,15 +141,17 @@ export default function BusesInfo({ bus, setBusNum }) {
               ))}
             </datalist>
             <br />
-            <button
-              onClick={handleDistLocation}
-              className="clickbtn ml-20 bg-black text-white px-3 py-1 mt-5"
-            >
-              click
-            </button>
+            <div className=" text-center">
+              <button
+                onClick={handleDistLocation}
+                className="clickbtn m-auto text-center bg-black text-white px-3 py-1 mt-5"
+              >
+                click
+              </button>
+            </div>
           </div>
 
-          <div className="bg-black conCard h-full col-span-3  px-[3%] grid grid-cols-3 gap-x-[4%] gap-y-[7%]">
+          <div className=" conCard flex-wrap h-full col-span-3 px-3 grid lg:grid-cols-3 ss:grid-cols-2 xs:grid-cols-1 gap-x-4 gap-y-5">
             {data !== "no buses found" && data.length ? (
               data
                 .filter((i) => {

@@ -145,7 +145,6 @@ body {
   box-sizing: content-box;
 }
 .search {
-  width: 40rem;
   padding: 0.5%;
   border: white;
   border-radius: 15px;

@@ -1,15 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   plugins: {
-    'postcss-import': {},
-    'tailwindcss/nesting': {},
+    "postcss-import": {},
+    "tailwindcss/nesting": {},
     tailwindcss: {},
     autoprefixer: {},
-  }
-,
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  },
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -17,7 +14,13 @@ module.exports = {
         secondary: "#000",
       },
     },
-    
+    screens: {
+      xs: "480px",
+      ss: "620px",
+      md: "1060px",
+      lg: "1200px",
+      xl: "1700px",
+    },
   },
   plugins: [],
-}
+};
