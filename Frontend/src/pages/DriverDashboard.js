@@ -88,7 +88,7 @@ function DriverDashboard() {
         setErr((err = "Unable to retrieve your location"));
         console.log(userLocation);
       }
-    }, 5000);
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [userLocation]);
   useEffect(() => {

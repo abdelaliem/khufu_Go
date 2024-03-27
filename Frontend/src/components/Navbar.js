@@ -47,10 +47,10 @@ function Navbar({ black }) {
         </div>
         <div className="ps-3">
           <ul className="list-none flex justify-end items-center flex-1 ">
-            <li className="px-3 text-[18px] text-white">
+            <li className="px-3 text-[18px]  text-white">
               <Link to={"/home"}>Home</Link>
             </li>
-            <li className="px-3 text-[18px] text-white">
+            <li className="px-3 text-[18px] xs:hidden ss:block text-white">
               <Link to={"/about"}>About us</Link>
             </li>
             <li className="px-3 text-[18px] text-white">

@@ -52,7 +52,7 @@ function UserDashboard({ busNum, setRequested }) {
     const res = await axios.put(`http://127.0.0.1:8000/updatelatlanguser`, {
       lat: userLocation.lat,
       lang: userLocation.lng,
-      userId: xs.id,
+      userId: xs?.id,
     });
   }
 
@@ -111,7 +111,7 @@ function UserDashboard({ busNum, setRequested }) {
         setErr((err = "Unable to retrieve your location"));
         console.log(userLocation);
       }
-    }, 5000);
+    }, 2000);
     return () => clearInterval(intervalId);
   }, [userLocation]);
   useEffect(() => {
@@ -128,7 +128,6 @@ function UserDashboard({ busNum, setRequested }) {
         });
         setMarkers([]);
       }
-      // map.current.flyTo({ center: [userLocation.lng, userLocation.lat] });
       const markerPopup = new mapboxgl.Popup({
         offset: 25,
         maxWidth: "100px",
@@ -139,9 +138,6 @@ function UserDashboard({ busNum, setRequested }) {
         .addTo(map.current)
         .setPopup(markerPopup)
         .getElement();
-      // .addEventListener("click", () => {
-      //   navigate('/home');
-      // });
       setMarkers((prevArray) => [...prevArray, marker]);
     }
   }, [isLoading2]);

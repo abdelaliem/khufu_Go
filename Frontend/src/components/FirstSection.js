@@ -62,7 +62,7 @@ function FirstSection({ bus, setBus, setSearch }) {
           Your Journey, Our Priority!
         </h1>
         <form
-          className="w-[400px] m-auto flex flex-col "
+          className="w-[360px] m-auto flex flex-col "
           method="get"
           action="/"
         >
