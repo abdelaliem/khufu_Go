@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/maki": "^8.0.1",
-    "@mapbox/mapbox-gl-directions": "^4.2.0",
+    "@mapbox/mapbox-gl-directions": "^4.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
